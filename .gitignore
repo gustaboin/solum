@@ -1,0 +1,6 @@
+backup.html
+AppData/
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
