@@ -284,5 +284,61 @@ document.addEventListener('DOMContentLoaded', function ()
 });
 
 
+// search
+
+document.getElementById('contact').addEventListener('submit', function (event)
+{
+	event.preventDefault(); // evita el envío del formulario
+
+	const query = this.q.value.toLowerCase(); // obtiene el texto de búsqueda
+	const contenido = document.querySelectorAll('body *:not(script):not(style):not(#search):not(#search *):not(.nav):not(.nav *):not(.main-banner):not(.main-banner *)');
+
+
+	let firstSearch = null;
+
+	contenido.forEach(elemento =>
+	{
+		if (elemento.children.length === 0 && elemento.textContent.trim() !== '')
+		{
+			const texto = elemento.textContent.toLowerCase();
+
+			if (texto.includes(query))
+			{
+				elemento.style.backgroundColor = 'yellow'; // resalta coincidencias
+
+				// Si no se ha encontrado ninguna coincidencia aún, guardamos esta
+				if (!firstSearch)
+				{
+					firstSearch = elemento;
+				}
+			} else
+			{
+				elemento.style.backgroundColor = ''; // limpia si no coincide
+			}
+		}
+	});
+
+	// Cierra el buscador
+	document.getElementById('search').classList.remove('open');
+
+	// Si hubo al menos una coincidencia, hacemos scroll
+	if (firstSearch)
+	{
+		firstSearch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+	}
+});
+
+// Agregá esta opción en la config del Modern-Slider
+$('.Modern-Slider').slick({
+
+	cssEase: 'ease',
+	// Evita transform en FF si vieras recorte aún
+	// (Slick detecta soporte automático, pero esto fuerza el fallback)
+	useTransform: false
+});
+
+
+// aca va el login //
+
 
 

@@ -1,0 +1,607 @@
+:root {
+    --bg: #0b1020;
+    /* fondo oscuro tipo nocturno */
+    --ink: #e6eefc;
+    /* texto claro */
+    --muted: #92a0b8;
+    /* texto secundario */
+    --accent: #56d364;
+    /* verde cultivo */
+    --accent2: #4fb3ff;
+    /* celeste mapas */
+    --card: #141a30;
+    /* paneles */
+    --shadow: 0 20px 60px rgba(0, 0, 0, .35);
+    --radius: 18px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%;
+
+}
+
+html,
+body {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    background-color: #fff;
+    font-size: 16px;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    line-height: 1.6;
+    overflow: hidden;
+}
+
+.header-area .main-nav .nav li a:hover {
+    color: #5fb759 !important;
+    transition: all 0.3s ease;
+}
+
+/* Escenario */
+.stage {
+    position: relative;
+    height: 100svh;
+    overflow: hidden;
+    background:
+        radial-gradient(80% 80% at 120% 10%, rgba(79, 179, 255, .25) 0%, rgba(79, 179, 255, 0) 60%),
+        radial-gradient(80% 80% at -10% 110%, rgba(86, 211, 100, .25) 0%, rgba(86, 211, 100, 0) 60%),
+        var(--bg);
+    min-height: 100vh;
+
+}
+
+/* Mapa base */
+.map-base {
+    position: absolute;
+    inset: -80px;
+    filter: saturate(1.05) contrast(1.05) brightness(.9);
+    background: #0a0f1e url('../images/back.png') center/cover no-repeat;
+    opacity: .25;
+    transform: scale(1.05);
+}
+
+/* Tarjetas flotantes */
+.card {
+    position: absolute;
+    width: min(360px, 38vw);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .03));
+    border: 1px solid rgba(255, 255, 255, .10);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transform: translateZ(0);
+    transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px) scale(1.015);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .45);
+}
+
+.card.hidden {
+    opacity: .2;
+    filter: grayscale(0.6) contrast(0.8);
+}
+
+.card .thumb {
+    width: 100%;
+    aspect-ratio: 16/10;
+    /* todas con misma proporción */
+    object-fit: contain;
+    /* ajusta la imagen sin cortar */
+    object-position: center;
+    background-color: #111;
+    display: block;
+}
+
+
+.card .body {
+    padding: 12px 14px 14px;
+}
+
+.card h3 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    letter-spacing: .2px;
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(86, 211, 100, .2);
+}
+
+.badge {
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, .12);
+    font-size: 12px;
+    color: var(--muted)
+}
+
+.note {
+    position: absolute;
+    padding: 10px 12px;
+    background: var(--card);
+    border: 1px dashed rgba(255, 255, 255, .22);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    max-width: 240px;
+    transform: rotate(-1.5deg);
+}
+
+.note .title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--ink);
+    font-size: 14px;
+}
+
+.note .hint {
+    color: var(--muted);
+    font-size: 13px
+}
+
+.table-card {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.95rem;
+    border-radius: 12px;
+    overflow: hidden;
+    /* bordes redondeados también en interior */
+    background: rgba(255, 255, 255, 0.04);
+    /* un toque transparente */
+}
+
+/*tables*/
+.table-card-dark {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.95rem;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.4);
+    /* fondo oscuro transparente */
+    color: #eee;
+}
+
+.table-card-dark thead {
+    background: rgba(95, 183, 89, 0.9);
+    /* verde corporativo */
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.table-card-dark th,
+.table-card-dark td {
+    padding: 5px 7px;
+    text-align: left;
+}
+
+.table-card-dark tbody tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.05);
+    /* zebra sutil */
+}
+
+.table-card-dark tbody tr:hover {
+    background: rgba(95, 183, 89, 0.15);
+    /* highlight verde al pasar */
+    transition: background 0.2s ease-in-out;
+}
+
+.table-card-dark td:last-child {
+    text-align: right;
+    font-weight: 600;
+    color: #5fb759;
+    /* resalta valores numéricos */
+}
+
+/* modal para imagen ampliada */
+/* --- MODAL OVERLAY --- */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.9);
+
+    /* Centrado absoluto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Oculto por defecto (sin romper layout) */
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.98);
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+.modal.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+/* --- IMAGEN AMPLIADA --- */
+/* Fijo 500x500 como pediste; si querés que en móvil no se corte, ver comentario */
+.modal-content {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    /* no deforma; encaja dentro de 500x500 */
+    background: #111;
+    /* marco si la imagen no llena */
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
+    display: block;
+}
+
+/* Si querés que en pantallas chicas no se pase, cambia por:
+   width: min(500px, 92vw);
+   height: min(500px, 92vh);
+*/
+
+/* --- Cerrar --- */
+.modal .close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    /*background: #5fb759; */
+    /* without background */
+    color: var(--accent);
+    font-size: 50px;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.caption {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #eee;
+    font-size: 14px;
+    opacity: .8;
+}
+
+/* Asegura que estilos globales no lo pisen */
+.modal img {
+    max-width: none;
+}
+
+
+/* Posiciones */
+.p1 {
+    top: 15%;
+    left: 8%;
+}
+
+.p2 {
+    bottom: 8%;
+    right: 10%;
+}
+
+.p3 {
+    top: 55%;
+    left: 28%;
+}
+
+.p4 {
+    top: 8%;
+    right: 28%;
+}
+
+.p5 {
+    bottom: 8%;
+    left: 50%;
+}
+
+/* Puntero/región marcada */
+.pin {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent2);
+    box-shadow: 0 0 0 6px rgba(79, 179, 255, .20), 0 0 18px rgba(79, 179, 255, .35);
+}
+
+.ring {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border: 2px dashed rgba(79, 179, 255, .55);
+    border-radius: 50%;
+    filter: blur(.2px);
+}
+
+/* Tooltip minimal */
+.tooltip {
+    position: absolute;
+    translate: -50% -130%;
+    background: var(--accent2);
+    border: 1px solid rgba(255, 255, 255, .14);
+    padding: 6px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: all .2s ease;
+}
+
+.pin:hover+.tooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#ndviCard {
+    width: 90% !important;
+    height: 300px !important;
+    margin: 10px 10px 1px 10px;
+}
+
+#rfaCard {
+    width: 90% !important;
+    height: 300px !important;
+    margin: 10px 10px 1px 10px;
+}
+
+#barChart {
+    width: 80% !important;
+    height: 200px !important;
+    margin: 10px 10px 1px 10px;
+}
+
+
+/* Footer */
+.footer {
+    position: fixed;
+    inset: auto 18px 18px 18px;
+    z-index: 50;
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* Drag & drop opcional para acomodar en vivo */
+.draggable {
+    cursor: grab;
+}
+
+.dragging {
+    opacity: .85;
+    cursor: grabbing;
+}
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+    body {
+        height: auto;
+    }
+
+    .stage {
+        height: auto;
+        min-height: 100svh;
+        padding-top: 80px !important;
+        padding: 40px 20px;
+    }
+
+    .card {
+        width: min(360px, 86vw);
+        height: min(300px, 50vh);
+    }
+
+    .table-card-dark {
+        display: none;
+    }
+
+    .p1 {
+        top: 15%;
+        left: 4%;
+    }
+
+    .p2 {
+        top: 38%;
+        right: 4%;
+    }
+
+    .p3 {
+        top: 64%;
+        left: 6%;
+    }
+
+    .p4 {
+        bottom: 6%;
+        right: 4%;
+    }
+
+    .p5 {
+        bottom: 12%;
+        left: 8%;
+    }
+
+    .note.download {
+        display: flex;
+        bottom: -5% !important;
+        top: auto !important;
+        left: 25% !important;
+    }
+
+    footer {
+        padding: 20px 0 20px 0 !important;
+
+    }
+}
+
+/* Responsive tweaks */
+
+/* Layout responsive */
+@media (max-width: 768px) {
+    .stage {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+        overflow-y: auto;
+        min-height: auto;
+    }
+
+    .card {
+        position: static !important;
+        /* deja de ser absolute */
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .note,
+    .pin,
+    .ring {
+        display: none;
+        /* oculta notas flotantes y pins en mobile */
+    }
+
+    #iframe {
+        visibility: hidden;
+    }
+
+    main#stage {
+        padding-top: 100px;
+    }
+}
+
+/* Header responsive */
+/*para corregir la navegación en pantallas medianas boostrap!!!*/
+@media (min-width: 767px) {
+    .container {
+        max-width: fit-content !important;
+    }
+}
+
+
+
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    body {
+        height: auto;
+    }
+
+    .header-area.header-sticky.container {
+        width: 100px !important;
+    }
+
+    .header-area.header-sticky {
+        background-color: #fff;
+        height: 100px !important;
+        width: 100%;
+        position: fixed !important;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .container {
+        max-width: fit-content !important;
+    }
+
+    .header-area .main-nav .nav li a {
+        color: #7a7a7a !important;
+    }
+
+    .logo-img {
+        display: none !important;
+    }
+
+    .logo2-img {
+        display: block !important;
+    }
+
+    .stage {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        padding: 24px;
+        overflow-y: auto;
+    }
+
+    main#stage {
+        padding-top: 100px;
+    }
+
+    .card {
+        position: static !important;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .note,
+    .pin,
+    .ring {
+        display: none;
+    }
+
+
+}
+
+@media (min-width: 1200px) and (max-width: 1820px) {
+    .card {
+        width: min(300px, 46vw);
+    }
+
+    .p3 {
+        top: 55%;
+        left: 38%;
+    }
+
+    .card.p5 {
+        display: none !important;
+    }
+
+
+    .card.p4 {
+        width: 360px;
+    }
+
+    #ndviCard {
+        width: 90% !important;
+        height: 300px !important;
+        margin: 10px 10px 1px 10px;
+    }
+
+}
